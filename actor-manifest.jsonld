@@ -1,0 +1,49 @@
+{
+  "@context": "https://etzhayyim.com/ns/actor/v1",
+  "@id": "did:web:airshed.etzhayyim.com",
+  "name": "airshed",
+  "displayName": "Airshed — Clean Air System-of-Systems",
+  "description": "Evidence, scenario, and accountable-decision actor for airshed-scale clean-air action. Human councils retain all regulatory, financial, and publication authority.",
+  "runtime": "kotoba-wasm",
+  "performerType": "service",
+  "heartbeatRequired": true,
+  "domainKnowledgeRequired": true,
+  "capabilities": ["airshed.observe", "airshed.model", "airshed.propose", "airshed.audit", "airshed.collaborate", "airshed.engage", "airshed.convene"],
+  "governance": {
+    "classification": "public-interest",
+    "raci": "responsible-for-evidence",
+    "rules": [
+      {"id": "RULE-AIRSHED-PROVENANCE", "enforcement": "Every observation and model result carries source, observedAt, scope, and confidence."},
+      {"id": "RULE-AIRSHED-NO-AUTONOMOUS-ACTUATION", "enforcement": "The actor may only create proposals. Regulatory actions, transfers, and public facility identification require a signed council decision."},
+      {"id": "RULE-AIRSHED-MINIMUM-DISCLOSURE", "enforcement": "Household, worker, and smallholder data are aggregated or withheld unless a lawful, consented disclosure basis is recorded."}
+      ,{"id": "RULE-AIRSHED-VOLUNTARY-PARTICIPATION", "enforcement": "Collaborator registration and outreach are opt-in, purpose-bound, withdrawable, and must not rank or profile people politically."}
+      ,{"id": "RULE-AIRSHED-EVENT-NONBINDING", "enforcement": "An event may inform or verify; it cannot create a regulatory or financial commitment without a separately signed council decision."}
+    ]
+  },
+  "pipelines": [
+    {
+      "trigger": {"type": "cron", "cron": "15 1 * * *"},
+      "steps": [
+        {"id": "validateObservations", "fn": "airshed.observe", "args": {"scope": "india/delhi-ncr", "checks": ["completeness", "calibration", "provenance"]}},
+        {"id": "updateScenario", "fn": "airshed.model", "depends_on": ["validateObservations"], "args": {"scope": "india/delhi-ncr", "mode": "advisory-only"}},
+        {"id": "draftBrief", "fn": "airshed.propose", "depends_on": ["updateScenario"], "args": {"requiresHumanApproval": true}},
+        {"id": "appendAudit", "fn": "airshed.audit", "depends_on": ["draftBrief"], "args": {"visibility": "public-safe"}}
+      ]
+    }
+  ],
+  "collaboration": {
+    "eligibleRoles": ["public-authority", "farmer-organisation", "worker-organisation", "health-institution", "school", "technical-organisation", "finance-partner", "community-representative"],
+    "minimumDisclosure": ["role", "jurisdiction", "consent-status", "conflict-declaration"],
+    "engagementLifecycle": ["draft", "consent-confirmed", "sent", "responded", "closed", "withdrawn"],
+    "eventKinds": ["listening-session", "technical-clinic", "council-observation", "implementation-workshop", "verification-visit"]
+  },
+  "deployment": {
+    "target": "app-aozora",
+    "mode": "external-actor-repository",
+    "descriptor": "deploy/app-aozora.edn",
+    "requires": ["pinned-revision", "manifest-digest", "did-match", "capability-allowlist"],
+    "forbidden": ["deployment-time-policy-rewrite", "server-held-actor-key"]
+  },
+  "requiredCollections": ["org.etzhayyim.airshed.observation", "org.etzhayyim.airshed.scenario", "org.etzhayyim.airshed.decision"],
+  "profile": {"agentType": "advisory", "isBot": true, "operator": "etzhayyim.co.jp", "capabilities": ["evidence-ledger", "scenario-brief", "decision-audit"]}
+}

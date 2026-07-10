@@ -1,0 +1,17 @@
+{:deployment/id "airshed-app-aozora"
+ :deployment/target :app-aozora
+ :deployment/mode :external-actor-repository
+ :deployment/actor-did "did:web:airshed.etzhayyim.com"
+ :deployment/manifest-path "actor-manifest.jsonld"
+ :deployment/required-contracts
+ ["com.etzhayyim.airshed.communitySession"
+  "com.etzhayyim.airshed.transitionSupport"
+  "com.etzhayyim.airshed.outcomeVerification"
+  "com.etzhayyim.airshed.collaborator"
+  "com.etzhayyim.airshed.engagement"
+  "com.etzhayyim.airshed.event"]
+ :deployment/capability-allowlist
+ [:airshed.observe :airshed.model :airshed.propose :airshed.audit
+  :airshed.collaborate :airshed.engage :airshed.convene]
+ :deployment/approval-required true
+ :deployment/notes "Aozora hosts the AT Protocol/AppView boundary only. The actor's manifest, policy, lexicons, and runtime source remain in this repository."}
