@@ -23,6 +23,10 @@ primary and secondary sources.
 The machine-readable actor contract is [actor-manifest.jsonld](actor-manifest.jsonld).
 The portable data vocabulary is implemented in `kotoba-lang/airshed`.
 
+To run the contract gate that keeps the manifest, the deploy descriptor, and the
+lexicons saying the same thing — and to see it refuse a drifted descriptor —
+follow [docs/operator-quickstart.md](docs/operator-quickstart.md).
+
 ## Collaboration and participation
 
 The actor maintains a collaborator registry for public authorities, farmer and
