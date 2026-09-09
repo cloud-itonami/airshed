@@ -5,7 +5,7 @@
   『実物がその規則を通ること』を見る。deploy/app-aozora.edn が
   :deployment/requires に自分で挙げている did-match / capability-allowlist を
   含め、manifest ↔ deploy ↔ lex/ の 3 面一致を固定する。"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [clojure.test :refer [deftest is testing]]
             [cljs.reader :as reader]
             [etzhayyim.airshed.contract :as c]

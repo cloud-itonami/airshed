@@ -23,7 +23,7 @@
    静かに割れる』形（@id と did.json が別 DID になっても誰も報告しない）と
    同じ状態だった。ここでは規則を純粋関数として書き、fixture で「規則が実際に
    落ちる」ことを見せてから実ファイルに当てる。"
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn- v [rule detail] {:rule rule :detail detail})
 
