@@ -33,7 +33,7 @@ gate is pure `.cljc`/`.cljs` over files already committed here.
 From the repository root:
 
 ```bash
-nbb --classpath src:test run_tests.cljs
+kbb --backend sci --classpath src:test run_tests.cljs
 ```
 
 ```
@@ -55,7 +55,7 @@ pre-ship check.
 ## 2. Read what this actor may and may not do
 
 ```bash
-nbb -e '
+kbb --backend sci -e '
 (ns q (:require ["node:fs" :as fs] [clojure.string :as str]))
 (let [m (js->clj (js/JSON.parse (.readFileSync fs "actor-manifest.jsonld" "utf8")))]
   (println "did      " (get m "@id"))
@@ -87,7 +87,7 @@ it go red once. Add a sixth event kind to the manifest and to **nothing else**:
 
 ```bash
 # in actor-manifest.jsonld, collaboration.eventKinds — append "site-visit"
-nbb --classpath src:test run_tests.cljs; echo "exit=$?"
+kbb --backend sci --classpath src:test run_tests.cljs; echo "exit=$?"
 ```
 
 ```

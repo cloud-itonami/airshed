@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; run_tests.cljs — airshed actor contract の検査。
 ;;
-;;   nbb --classpath src:test run_tests.cljs
+;;   kbb --backend sci --classpath src:test run_tests.cljs
 ;;
 ;; deploy/app-aozora.edn は :deployment/requires に did-match と
 ;; capability-allowlist を自分で挙げているが、2026-08-22 までこの repo には
